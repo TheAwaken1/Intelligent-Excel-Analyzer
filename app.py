@@ -86,7 +86,7 @@ def filter_data(question):
         last_ai_response = "Load a sheet first."
         return last_ai_response, pd.DataFrame()
 
-    # Summarize DataFrame columns for the prompt
+    # Summarize DataFrame columns for the prompt or prompt
     column_summary = ""
     for col in current_df.columns:
         unique_vals = current_df[col].dropna().unique()[:5]
