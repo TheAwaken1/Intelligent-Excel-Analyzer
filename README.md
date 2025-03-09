@@ -1,5 +1,7 @@
 # Intelligent Excel Analyzer with Gemma-7B 📊🤖
 
+![App Icon](https://github.com/TheAwaken1/Intelligent-Excel-Analyzer/raw/main/icon.png)
+
 An AI-powered tool to analyze Excel and CSV files using natural language queries with the Gemma-7B model.
 
 ## Setup
