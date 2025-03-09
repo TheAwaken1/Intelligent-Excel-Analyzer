@@ -1,6 +1,6 @@
 module.exports = {
   run: [
-    // Clone the repository directly to the pinokio-integration branch
+    // Clone the repository directly to the pinokio-integration branch latest change
     {
       method: "shell.run",
       params: {
