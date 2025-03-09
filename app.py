@@ -210,7 +210,8 @@ Return ONLY the JSON object, nothing else. Do not include explanations, extra te
                         result_df = result_df[result_df[col] != val]
                     else:
                         raise ValueError(f"Unsupported operator: {operator}")
-                output_message.append(f"Filtered by: {' and '.join([f'{c['column']} {c['operator']} {c['value']}' for c in conditions])}")
+                conditions_str = ' and '.join([f"{c['column']} {c['operator']} {c['value']}" for c in conditions])
+                output_message.append(f"Filtered by: {conditions_str}")
 
             elif op_type == "sort":
                 columns = op.get("columns", [])
