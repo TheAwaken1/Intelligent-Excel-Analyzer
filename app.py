@@ -12,11 +12,23 @@ import logging
 logging.basicConfig(level=logging.INFO)
 
 # Device and model configuration
-device = "cuda" if torch.cuda.is_available() else "cpu"
+if torch.cuda.is_available():
+    device = "cuda"
+elif torch.backends.mps.is_available():
+    device = "mps"
+else:
+    device = "cpu"
+logging.info(f"Using device: {device}")
+
 model_name = "google/gemma-7b-it"  # Default model; users can change to any compatible model
-quant_config = BitsAndBytesConfig(load_in_4bit=True)
 tokenizer = AutoTokenizer.from_pretrained(model_name)
-model = AutoModelForCausalLM.from_pretrained(model_name, quantization_config=quant_config, device_map="auto")
+
+if device == "cuda":
+    quant_config = BitsAndBytesConfig(load_in_4bit=True)
+    model = AutoModelForCausalLM.from_pretrained(model_name, quantization_config=quant_config, device_map="auto")
+else:
+    model = AutoModelForCausalLM.from_pretrained(model_name).to(device)
+logging.info("Model loaded successfully")
 
 # Global variables for data state
 current_df = pd.DataFrame()
