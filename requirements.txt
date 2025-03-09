@@ -1,0 +1,6 @@
+gradio
+pandas
+torch
+transformers
+huggingface_hub
+openpyxl
