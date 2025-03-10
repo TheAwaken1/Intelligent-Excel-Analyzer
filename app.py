@@ -86,7 +86,7 @@ def filter_data(question):
         last_ai_response = "Load a sheet first."
         return last_ai_response, pd.DataFrame()
 
-    # Summarize DataFrame columns for the prompt or prompt
+    # Summarize DataFrame columns for the prompt
     column_summary = ""
     for col in current_df.columns:
         unique_vals = current_df[col].dropna().unique()[:5]
@@ -210,7 +210,7 @@ Return ONLY the JSON object, nothing else. Do not include explanations, extra te
                         result_df = result_df[result_df[col] != val]
                     else:
                         raise ValueError(f"Unsupported operator: {operator}")
-                conditions_str = ' and '.join([f'{c["column"]} {c["operator"]} {c["value"]}' for c in conditions])
+                conditions_str = ' and '.join([f"{c['column']} {c['operator']} {c['value']}" for c in conditions])
                 output_message.append(f"Filtered by: {conditions_str}")
 
             elif op_type == "sort":
@@ -310,8 +310,9 @@ def export_data(format_choice):
         full_path = os.path.join(output_folder, filename)
         try:
             with open(full_path, 'w', newline='') as f:
-                f.write(f"# AI Response:\n")
-                f.write(f"# {last_ai_response.replace('\n', '\n# ')}\n")
+                f.write("# AI Response:\n")
+                response_with_prefix = last_ai_response.replace('\n', '\n# ')
+                f.write(f"# {response_with_prefix}\n")
                 current_df.to_csv(f, index=False)
                 if "Aggregates:" in last_ai_response:
                     f.write("# Aggregates:\n")
@@ -376,4 +377,4 @@ with gr.Blocks() as app:
     reset_btn.click(reset_data, inputs=None, outputs=[ai_response, data_preview])
     export_btn.click(export_data, inputs=export_format, outputs=[ai_response, export_file])
 
-app.launch()  # Removed debug=True for production
+app.launch()
