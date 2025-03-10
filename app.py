@@ -4,6 +4,7 @@ import torch
 import json
 import re
 import os
+import numpy as np
 from datetime import datetime
 from transformers import AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig
 import logging

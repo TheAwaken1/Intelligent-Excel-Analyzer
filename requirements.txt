@@ -4,3 +4,7 @@ torch
 transformers
 huggingface_hub
 openpyxl
+bitsandbytes
+accelerate>=0.26.0
+numpy<2
+

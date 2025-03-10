@@ -59,7 +59,7 @@ module.exports = {
       } else {
         return [{
           icon: "fa-solid fa-power-off",
-          text: "<div><strong>Analyze Excel/CSV</strong><br><div>Filter and export data with AI</div></div>",
+          text: "Start",
           href: "start.js"
         }, {
           icon: "fa-regular fa-folder-open",

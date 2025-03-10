@@ -4,21 +4,29 @@ module.exports = {
     {
       "method": "shell.run",
       "params": {
+        "venv": "env",
         "path": "app",
         "env": {
-          "HF_TOKEN": "your_huggingface_token_here"  // Replace with your actual token
+          "HF_TOKEN": "add_your_HF_token_here"
         },
-        "message": "E:\\AIOne\\pinokio\\api\\Intelligent-Excel-Analyzer\\app\\env\\Scripts\\python.exe app.py",
-        "on": [{ "event": "/Running on local URL:\\s*(http:\\/\\/[^\\s]+)/", "done": true }]
+        "message": "python app.py",
+        "on": [{
+          "event": "/http:\\/\\/\\S+/",
+          "done": true
+        }]
       }
     },
     {
       "method": "local.set",
-      "params": { "url": "{{input.event[0]}}" }
+      "params": {
+        "url": "{{input.event[0]}}"
+      }
     },
     {
       "method": "browser.open",
-      "params": { "uri": "{{input.event[0]}}" }
+      "params": {
+        "uri": "{{input.event[0]}}"
+      }
     }
   ]
 }
