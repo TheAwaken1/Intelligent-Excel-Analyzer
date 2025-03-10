@@ -2,7 +2,7 @@ const path = require('path');
 module.exports = {
   version: "1.0",
   title: "Intelligent Excel Analyzer",
-  description: "Gradio UI for analyzing Excel/CSV files with AI-powered filtering and exporting. Powered by Gemma 7B.",
+  description: "Gradio UI for analyzing Excel/CSV files with AI-powered filtering and exporting. Powered by Gemma-7B.",
   icon: "icon.png",
   menu: async (kernel, info) => {
     let installed = info.exists("app/env");
