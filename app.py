@@ -221,7 +221,8 @@ Return ONLY the JSON object, nothing else. Do not include explanations, extra te
                     if col not in result_df.columns:
                         raise ValueError(f"Sort column '{col}' not found in DataFrame.")
                 result_df = result_df.sort_values(by=sort_cols, ascending=[not o for o in sort_orders])
-                output_message.append(f"Sorted by: {', '.join([f'{s['column']} {'desc' if s['direction'] == 'desc' else 'asc'}' for s in columns])}")
+                sort_str = ', '.join([f"{s['column']} {'desc' if s['direction'] == 'desc' else 'asc'}" for s in columns])
+                output_message.append(f"Sorted by: {sort_str}")
 
             elif op_type == "select":
                 columns = op.get("columns", [])
