@@ -20,14 +20,19 @@ else:
     device = "cpu"
 logging.info(f"Using device: {device}")
 
+# Retrieve Hugging Face token from environment variable
+HF_TOKEN = os.getenv("HF_TOKEN")
+if not HF_TOKEN:
+    raise ValueError("HF_TOKEN environment variable not set. Please provide a Hugging Face token.")
+
 model_name = "google/gemma-7b-it"  # Default model; users can change to any compatible model
-tokenizer = AutoTokenizer.from_pretrained(model_name)
+tokenizer = AutoTokenizer.from_pretrained(model_name, token=HF_TOKEN)
 
 if device == "cuda":
     quant_config = BitsAndBytesConfig(load_in_4bit=True)
-    model = AutoModelForCausalLM.from_pretrained(model_name, quantization_config=quant_config, device_map="auto")
+    model = AutoModelForCausalLM.from_pretrained(model_name, quantization_config=quant_config, device_map="auto", token=HF_TOKEN)
 else:
-    model = AutoModelForCausalLM.from_pretrained(model_name).to(device)
+    model = AutoModelForCausalLM.from_pretrained(model_name, token=HF_TOKEN).to(device)
 logging.info("Model loaded successfully")
 
 # Global variables for data state
